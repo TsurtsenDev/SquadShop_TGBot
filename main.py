@@ -4,10 +4,15 @@ from telebot.types import Message, WebAppInfo
 import webbrowser
 import sqlite3
 import asyncio
-import sqlite3
 import database
+import openai 
 
-telebot.TeleBot("7057179821:AAEjvdjmucsJgMuVAJFo8t5FD5837yK67HY")
+def create_connection():
+  conn = sqlite3.connect('bot_database.db')
+  return conn
+  
+
+bot = telebot.TeleBot("7057179821:AAEjvdjmucsJgMuVAJFo8t5FD5837yK67HY")
 
 botname = "SkySquad"
 
@@ -24,7 +29,7 @@ golds = {}  # Словарь для хранения количества гол
 
 
 
-@bot.message_handler(commands=['start', 'menu'])
+@bot.message_handler(commands=['start','menu'])
 def start(message):
   markup = types.InlineKeyboardMarkup()
   b1 = types.InlineKeyboardButton('Каталог', callback_data='catalog')
